@@ -7,545 +7,217 @@
 <meta name="description" content="Leafspire Foundation is a youth-driven movement advancing leadership, mental wellbeing, sustainability, community service, and social impact across Africa.">
 <meta property="og:title" content="Leafspire Foundation">
 <meta property="og:description" content="Empowering Youth. Transforming Communities. Building Tomorrow.">
-<meta name="theme-color" content="#0D1F0E">
+<meta name="theme-color" content="#070D08">
+<link rel="icon" type="image/png" href="images/leafspirelogo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --forest: #1A3A1E;
-  --forest-deep: #0D1F0E;
-  --sage: #5C7E5F;
-  --sage-light: #8AAD8D;
-  --sage-pale: #C4D9C6;
-  --espresso: #2B1A0F;
-  --espresso-mid: #3D2515;
-  --tan: #9E7B52;
-  --tan-light: #C9A97A;
-  --cream: #F2EBD9;
-  --cream-warm: #E8DCC8;
-  --cream-deep: #D4C5A9;
-  --parchment: #FAF6EE;
-  --text-dark: #1A1208;
-  --text-mid: #4A3728;
-  --text-muted: #7A6555;
+:root{
+  --bg:#070D08;
+  --bg-soft:#0E1A10;
+  --panel:#0F1B11;
+  --ink:#F4EEDF;
+  --ink-dim:#B9C4B4;
+  --sage:#8AAD8D;
+  --gold:#CBA46C;
+  --gold-soft:#E4CBA0;
+  --line:rgba(244,238,223,.09);
+  --line-strong:rgba(244,238,223,.16);
+  --glow:rgba(203,164,108,.16);
+  --radius-lg:22px;
+  --radius-md:16px;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  cursor:none;
+}
+@media (hover:none){ body{cursor:auto;} }
+::selection{background:var(--gold);color:#1a1208;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;width:7px;height:7px;background:var(--gold-soft);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;}
+.cursor-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(203,164,108,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+body.hovering .cursor{width:12px;height:12px;background:var(--ink);}
+body.hovering .cursor-ring{width:46px;height:46px;border-color:rgba(203,164,108,.65);}
+@media (hover:none){.cursor,.cursor-ring{display:none;}}
+
+/* ---------- ambient bg ---------- */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(ellipse 70% 45% at 50% 8%,var(--glow) 0%,transparent 60%),
+  radial-gradient(ellipse 60% 40% at 85% 90%,rgba(138,173,141,.08) 0%,transparent 65%),
+  var(--bg);}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.wrap{position:relative;z-index:2;}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100svh;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  padding:0 24px clamp(48px,7vh,84px);
+  position:relative;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* orbit arch */
+.orbit-wrap{
+  position:relative;
+  width:min(720px,94vw);
+  height:clamp(200px,32vh,280px);
+  margin-bottom:clamp(8px,2vh,20px);
+  overflow:hidden;
+}
+.orbit-wrap::before,.orbit-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:16%;z-index:3;pointer-events:none;
+}
+.orbit-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 100%);}
+.orbit-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 100%);}
 
-body {
-  background: var(--forest-deep);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  overflow-x: hidden;
-  cursor: none;
+.pivot{
+  --dur:120s;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:2px;
+  height:var(--radius,110px);
+  transform-origin:50% 100%;
+  animation:spin var(--dur) linear infinite;
+  animation-delay:calc(var(--dur) / -8 * var(--i));
+  will-change:transform;
 }
+.pivot .card{
+  position:absolute;
+  top:0;left:50%;
+  transform:translate(-50%,-50%);
+  animation:spin-rev var(--dur) linear infinite;
+  animation-delay:calc(var(--dur) / -8 * var(--i));
+  will-change:transform;
+}
+.pivot .card .frame{
+  width:var(--size,84px);
+  height:var(--size,84px);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 14px 34px rgba(0,0,0,.45),0 0 0 1px var(--line);
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease,filter .5s ease;
+  filter:blur(var(--blur,0px));
+  opacity:var(--fade,1);
+}
+.pivot .card img{width:100%;height:100%;object-fit:cover;display:block;}
+@media (hover:hover){
+  .pivot .card .frame:hover{transform:scale(1.08) translateY(-4px);box-shadow:0 22px 46px rgba(0,0,0,.55),0 0 0 1px var(--line-strong);filter:blur(0);opacity:1;z-index:5;}
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes spin-rev{to{transform:translate(-50%,-50%) rotate(-360deg);}}
 
-/* ── CURSOR ── */
-.cursor { position: fixed; width: 8px; height: 8px; background: var(--tan-light); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .25s, height .25s, background .25s; }
-.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(201,169,122,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s, border-color .3s; }
-body.hovering .cursor { width: 14px; height: 14px; background: var(--cream); }
-body.hovering .cursor-ring { width: 44px; height: 44px; border-color: rgba(201,169,122,.7); }
-@media (hover: none) { .cursor, .cursor-ring { display: none; } body { cursor: auto; } }
+.hero-identity{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:14px;
+}
+.logo-badge{width:64px;height:64px;border-radius:50%;border:1px solid var(--line-strong);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--panel);margin-bottom:6px;
+  opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.22,1,.36,1) .1s forwards;}
+.logo-badge img{width:100%;height:100%;object-fit:cover;}
+.logo-badge.mark-fallback img{display:none;}
+.logo-badge svg{width:30px;height:30px;color:var(--gold-soft);}
+.eyebrow{
+  font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-soft);
+  opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.22,1,.36,1) .22s forwards;
+}
+.wordmark{
+  font-family:var(--serif);font-weight:300;font-size:clamp(38px,7vw,64px);line-height:1;color:var(--ink);
+  opacity:0;transform:translateY(12px);animation:rise .9s cubic-bezier(.22,1,.36,1) .34s forwards;
+}
+.wordmark em{font-style:italic;color:var(--gold-soft);}
+.tagline{
+  font-size:14px;font-weight:300;color:var(--ink-dim);max-width:360px;line-height:1.7;
+  opacity:0;transform:translateY(10px);animation:rise .9s cubic-bezier(.22,1,.36,1) .46s forwards;
+}
+.scroll-cue{
+  margin-top:20px;display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;cursor:none;
+  opacity:0;animation:rise .9s cubic-bezier(.22,1,.36,1) .6s forwards,bob 2.6s ease-in-out 1.6s infinite;
+  transition:color .3s;
+}
+.scroll-cue:hover{color:var(--gold-soft);}
+.scroll-cue svg{width:13px;height:13px;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+@keyframes rise{to{opacity:1;transform:translateY(0);}}
 
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--forest-deep); }
-::-webkit-scrollbar-thumb { background: var(--tan); border-radius: 2px; }
+/* ---------- LINKS ---------- */
+.links{padding:clamp(70px,10vh,120px) 24px clamp(50px,8vh,90px);max-width:640px;margin:0 auto;}
+.section-label{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:10px;}
+.section-heading{font-family:var(--serif);font-weight:300;font-size:clamp(24px,4vw,34px);text-align:center;color:var(--ink);margin-bottom:44px;}
+.section-heading em{font-style:italic;color:var(--gold-soft);}
 
-/* ── BG SLIDESHOW ── */
-.bg-slide { position: fixed; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2.2s ease; pointer-events: none; }
-.bg-slide.active { opacity: 1; }
-.bg-overlay { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(13,31,14,.82) 0%, rgba(13,31,14,.6) 50%, rgba(13,31,14,.88) 100%); pointer-events: none; }
+.featured-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:36px;}
+.featured-card{
+  position:relative;padding:26px 22px;border-radius:var(--radius-lg);
+  background:linear-gradient(155deg,rgba(203,164,108,.1),rgba(203,164,108,.02));
+  border:1px solid var(--line-strong);text-decoration:none;color:inherit;cursor:none;overflow:hidden;
+  opacity:0;transform:translateY(18px);transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s ease,background .4s ease;
+}
+.featured-card.visible{animation:rise .7s cubic-bezier(.22,1,.36,1) forwards;}
+.featured-card:hover{transform:translateY(-4px);border-color:rgba(203,164,108,.5);background:linear-gradient(155deg,rgba(203,164,108,.16),rgba(203,164,108,.04));}
+.featured-card .ficon{width:34px;height:34px;margin-bottom:16px;color:var(--gold-soft);}
+.featured-card .ficon svg{width:100%;height:100%;}
+.featured-card h3{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--ink);margin-bottom:6px;}
+.featured-card p{font-size:12px;font-weight:300;color:var(--ink-dim);line-height:1.6;}
 
-/* Unsplash images — African youth empowerment contexts */
-.bg-1 { background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&q=80'); }
-.bg-2 { background-image: url('https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1920&q=80'); }
-.bg-3 { background-image: url('https://images.unsplash.com/photo-1607748851687-ba9a10438621?w=1920&q=80'); }
-.bg-4 { background-image: url('https://images.unsplash.com/photo-1597733336794-12d05021d510?w=1920&q=80'); }
+.link-grid{display:flex;flex-direction:column;gap:10px;}
+.link-card{
+  position:relative;display:flex;align-items:center;gap:16px;
+  padding:16px 18px;border-radius:var(--radius-md);
+  background:rgba(244,238,223,.03);
+  border:1px solid var(--line);
+  text-decoration:none;color:inherit;cursor:none;overflow:hidden;
+  opacity:0;transform:translateY(18px);
+  transition:border-color .35s ease,background .35s ease,transform .3s ease,box-shadow .35s ease;
+  backdrop-filter:blur(10px);
+}
+.link-card.visible{animation:rise .6s cubic-bezier(.22,1,.36,1) forwards;}
+.link-card:hover{border-color:rgba(203,164,108,.4);background:rgba(244,238,223,.055);transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.3);}
+.link-card::after{content:'';position:absolute;top:0;left:-100%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(244,238,223,.04),transparent);transition:left .6s ease;}
+.link-card:hover::after{left:150%;}
+.link-icon{width:40px;height:40px;flex-shrink:0;border-radius:11px;background:rgba(138,173,141,.12);border:1px solid rgba(138,173,141,.2);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;}
+.link-card:hover .link-icon{background:rgba(203,164,108,.14);border-color:rgba(203,164,108,.35);}
+.link-icon svg{width:17px;height:17px;color:var(--sage);transition:color .3s;}
+.link-card:hover .link-icon svg{color:var(--gold-soft);}
+.link-text{flex:1;min-width:0;}
+.link-name{font-size:14px;font-weight:500;color:var(--ink);}
+.link-sub{font-size:12px;font-weight:300;color:var(--sage);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.link-arrow{width:24px;height:24px;flex-shrink:0;border-radius:50%;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s,transform .3s;}
+.link-card:hover .link-arrow{border-color:rgba(203,164,108,.6);background:rgba(203,164,108,.12);transform:rotate(45deg);}
+.link-arrow svg{width:10px;height:10px;color:var(--gold-soft);}
 
-/* ── CANVAS PARTICLES ── */
-#particles { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+footer{padding:36px 24px 40px;text-align:center;border-top:1px solid var(--line);}
+.footer-copy{font-size:11px;color:var(--sage);letter-spacing:.06em;font-weight:300;}
 
-/* ── SITE WRAPPER ── */
-.site-wrap { position: relative; z-index: 10; }
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  overflow: hidden;
+/* ---------- responsive ---------- */
+@media (max-width:600px){
+  .featured-row{grid-template-columns:1fr;}
+  .orbit-wrap{height:clamp(170px,28vh,220px);}
 }
-
-.hero-left {
-  background: rgba(26,58,30,.88);
-  backdrop-filter: blur(2px);
-  padding: clamp(60px,8vw,120px) clamp(40px,6vw,90px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
-  position: relative;
-  z-index: 2;
-}
-
-.hero-right {
-  background: rgba(43,26,15,.72);
-  backdrop-filter: blur(1px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Logo in hero-left */
-.logo-mark {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 48px;
-  opacity: 0;
-  transform: translateY(16px);
-  animation: rise .9s cubic-bezier(.22,1,.36,1) .2s forwards;
-}
-.logo-circle-wrap {
-  width: 58px; height: 58px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(201,169,122,.5);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.logo-circle-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.logo-wordmark { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--cream-deep); line-height: 1.3; }
-.logo-wordmark span { display: block; font-size: 10px; font-weight: 300; letter-spacing: .18em; color: var(--sage-light); margin-top: 3px; }
-
-.hero-eyebrow {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px; font-weight: 500;
-  letter-spacing: .3em; text-transform: uppercase;
-  color: var(--tan-light);
-  margin-bottom: 20px;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .8s cubic-bezier(.22,1,.36,1) .5s forwards;
-}
-
-.hero-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(40px, 5.5vw, 72px);
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--parchment);
-  margin-bottom: 24px;
-  opacity: 0; transform: translateY(18px);
-  animation: rise 1s cubic-bezier(.22,1,.36,1) .65s forwards;
-}
-.hero-headline em { font-style: italic; color: var(--tan-light); }
-
-.hero-body {
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--sage-pale);
-  max-width: 380px;
-  margin-bottom: 40px;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .9s cubic-bezier(.22,1,.36,1) .85s forwards;
-}
-
-.hero-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
-  border-radius: 100px;
-  background: linear-gradient(135deg, var(--tan) 0%, var(--tan-light) 100%);
-  color: var(--espresso);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-decoration: none;
-  cursor: none;
-  transition: transform .3s ease, box-shadow .3s ease;
-  align-self: flex-start;
-  opacity: 0; transform: translateY(14px);
-  animation: rise .9s cubic-bezier(.22,1,.36,1) 1s forwards;
-}
-.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(158,123,82,.35); }
-.hero-cta svg { width: 14px; height: 14px; }
-
-/* ── HERO RIGHT: leaf composition ── */
-.leaf-scene {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-}
-
-.leaf-bg-texture {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 60% 40%, rgba(92,126,95,.15) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 30% 70%, rgba(158,123,82,.1) 0%, transparent 50%);
-}
-
-/* SVG leaf cluster */
-.leaf-svg-wrap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@keyframes leafSway { 0%,100%{transform:rotate(-2deg) scale(1)} 50%{transform:rotate(2deg) scale(1.02)} }
-@keyframes leafDrift { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-@keyframes leafGlow { 0%,100%{opacity:.7} 50%{opacity:1} }
-
-.leaf-cluster { animation: leafSway 8s ease-in-out infinite; transform-origin: center; }
-.leaf-gold { animation: leafDrift 6s ease-in-out infinite; }
-.leaf-sprig { animation: leafDrift 10s ease-in-out infinite reverse; }
-
-/* diagonal leaf anchor line */
-.hero-diagonal {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: calc(88% - 1px);
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(201,169,122,.25) 30%, rgba(201,169,122,.15) 70%, transparent);
-  z-index: 3;
-}
-
-/* ── FEATURE BAR ── */
-.feature-bar {
-  position: relative;
-  background: var(--sage);
-  padding: 56px clamp(24px, 6vw, 80px);
-  overflow: hidden;
-}
-.feature-bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(255,255,255,.06) 0%, transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.feature-card-float {
-  position: relative;
-  background: var(--forest);
-  border-radius: 20px;
-  padding: 40px clamp(24px,5vw,60px);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  box-shadow: 0 24px 80px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
-}
-.feature-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 20px;
-  border-radius: 12px;
-  transition: background .3s ease;
-  cursor: none;
-}
-.feature-col:hover { background: rgba(255,255,255,.04); }
-.feature-icon { width: 40px; height: 40px; flex-shrink: 0; color: var(--tan-light); }
-.feature-col h3 { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--cream); letter-spacing: .02em; }
-.feature-col p { font-size: 12px; font-weight: 300; color: var(--sage-pale); line-height: 1.65; }
-
-/* ── PILLAR GRID ── */
-.pillar-section {
-  background: var(--forest-deep);
-  padding: clamp(60px,8vw,120px) clamp(24px,6vw,80px);
-}
-.pillar-header {
-  margin-bottom: 56px;
-}
-.pillar-eyebrow {
-  font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--tan); margin-bottom: 14px;
-}
-.pillar-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px,4vw,52px);
-  font-weight: 300;
-  color: var(--parchment);
-  line-height: 1.15;
-}
-.pillar-title em { font-style: italic; color: var(--sage-light); }
-
-.pillar-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, auto);
-  gap: 16px;
-}
-
-.pillar-card {
-  border-radius: 18px;
-  padding: 32px 28px;
-  position: relative;
-  overflow: hidden;
-  cursor: none;
-  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
-}
-.pillar-card:hover { transform: translateY(-5px); box-shadow: 0 28px 60px rgba(0,0,0,.5); }
-
-.pillar-card.sage { background: var(--sage); }
-.pillar-card.espresso { background: var(--espresso-mid); }
-.pillar-card.tan { background: var(--tan); }
-.pillar-card.img-card { padding: 0; overflow: hidden; min-height: 260px; }
-.pillar-card.dark-brown { background: #231409; }
-.pillar-card.cream-card { background: var(--cream-warm); }
-
-.card-badge {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
-  flex-shrink: 0;
-}
-.badge-white { background: rgba(255,255,255,.15); }
-.badge-sage { background: rgba(92,126,95,.25); }
-.badge-tan { background: rgba(201,169,122,.2); }
-.badge-dark { background: rgba(255,255,255,.08); }
-.badge-hex { background: var(--espresso-mid); }
-
-.pillar-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
-.pillar-card.cream-card h3 { color: var(--espresso); }
-.pillar-card:not(.cream-card) h3 { color: var(--parchment); }
-.pillar-card p { font-size: 13px; font-weight: 300; line-height: 1.7; }
-.pillar-card.cream-card p { color: var(--text-mid); }
-.pillar-card:not(.cream-card) p { color: var(--sage-pale); }
-
-.img-card-inner {
-  position: absolute; inset: 0;
-  background: url('https://images.unsplash.com/photo-1544717305-996b815c338c?w=800&q=80') center/cover;
-}
-.img-card-inner::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(26,58,30,.85) 0%, transparent 60%);
-}
-.img-card-text {
-  position: absolute; bottom: 28px; left: 28px; right: 28px; z-index: 2;
-}
-.img-card-text p { font-size: 13px; color: rgba(242,235,217,.75); font-weight: 300; margin-top: 6px; }
-.img-card-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--parchment); }
-
-/* Decorative number */
-.card-num {
-  position: absolute; bottom: 16px; right: 20px;
-  font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300;
-  opacity: .06; color: white; line-height: 1; pointer-events: none;
-}
-.pillar-card.cream-card .card-num { color: var(--espresso); opacity: .08; }
-
-/* ── ABOUT + STATS ── */
-.about-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  padding: clamp(60px,8vw,120px) clamp(24px,6vw,80px);
-  background: var(--espresso);
-}
-.about-left h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(30px,4vw,52px); font-weight: 300;
-  line-height: 1.15; color: var(--parchment);
-  margin-bottom: 24px;
-}
-.about-left h2 em { font-style: italic; color: var(--tan-light); }
-.about-left p { font-size: 15px; font-weight: 300; color: var(--cream-deep); line-height: 1.8; }
-.about-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--tan), var(--sage-light)); margin-bottom: 28px; }
-
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.stat-card {
-  padding: 28px 24px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.07);
-  transition: border-color .3s, transform .3s;
-  opacity: 0; transform: translateY(20px);
-}
-.stat-card.visible { animation: rise .7s cubic-bezier(.22,1,.36,1) forwards; }
-.stat-card:hover { border-color: rgba(201,169,122,.3); transform: translateY(-3px); }
-.stat-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px,4vw,48px); font-weight: 300;
-  color: var(--tan-light);
-  line-height: 1;
-}
-.stat-label { font-size: 12px; font-weight: 400; color: var(--sage-pale); margin-top: 8px; letter-spacing: .04em; }
-
-/* ── LINKS SECTION ── */
-.links-section {
-  padding: clamp(60px,8vw,100px) clamp(24px,6vw,80px);
-  background: var(--forest-deep);
-}
-.links-inner { max-width: 680px; margin: 0 auto; }
-.links-label { font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--tan); margin-bottom: 40px; text-align: center; }
-.links-grid { display: flex; flex-direction: column; gap: 10px; }
-
-.link-card {
-  display: flex; align-items: center; gap: 18px;
-  padding: 18px 22px; border-radius: 14px;
-  background: rgba(26,58,30,.4);
-  border: 1px solid rgba(92,126,95,.2);
-  text-decoration: none; color: inherit; cursor: none;
-  position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(20px);
-  transition: border-color .35s ease, transform .3s ease, background .3s ease;
-  backdrop-filter: blur(12px);
-}
-.link-card.visible { animation: rise .6s cubic-bezier(.22,1,.36,1) forwards; }
-.link-card:hover {
-  border-color: rgba(201,169,122,.4);
-  background: rgba(26,58,30,.65);
-  transform: translateY(-2px);
-}
-.link-card::after {
-  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.03), transparent);
-  transition: left .5s ease;
-}
-.link-card:hover::after { left: 150%; }
-
-.link-icon-wrap {
-  width: 42px; height: 42px; flex-shrink: 0; border-radius: 10px;
-  background: rgba(92,126,95,.18);
-  border: 1px solid rgba(92,126,95,.25);
-  display: flex; align-items: center; justify-content: center;
-  transition: background .3s, border-color .3s;
-}
-.link-card:hover .link-icon-wrap { background: rgba(201,169,122,.15); border-color: rgba(201,169,122,.35); }
-.link-icon-wrap svg { width: 18px; height: 18px; color: var(--sage-light); transition: color .3s; }
-.link-card:hover .link-icon-wrap svg { color: var(--tan-light); }
-.link-text { flex: 1; }
-.link-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--cream); }
-.link-handle { font-size: 12px; color: var(--sage-light); margin-top: 2px; font-weight: 300; }
-.link-arrow {
-  width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%;
-  border: 1px solid rgba(201,169,122,.2);
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color .3s, background .3s, transform .3s;
-}
-.link-card:hover .link-arrow { border-color: rgba(201,169,122,.6); background: rgba(201,169,122,.1); transform: rotate(45deg); }
-.link-arrow svg { width: 11px; height: 11px; color: var(--tan-light); }
-
-/* ── CTA ── */
-.cta-section {
-  padding: clamp(80px,10vw,140px) clamp(24px,6vw,80px);
-  background: var(--forest);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.cta-section::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(158,123,82,.12) 0%, transparent 70%);
-}
-.cta-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
-.cta-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--tan-light); margin-bottom: 20px; }
-.cta-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px,7vw,84px); font-weight: 300;
-  line-height: 1.05; color: var(--parchment); margin-bottom: 20px;
-}
-.cta-title em { font-style: italic; color: var(--tan-light); }
-.cta-body { font-size: 15px; font-weight: 300; color: var(--sage-pale); line-height: 1.75; margin-bottom: 48px; max-width: 520px; margin-left: auto; margin-right: auto; }
-.cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-.btn {
-  padding: 15px 30px; border-radius: 100px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; font-weight: 500;
-  letter-spacing: .08em;
-  cursor: none; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: transform .3s ease, box-shadow .3s ease;
-  position: relative; overflow: hidden;
-}
-.btn:hover { transform: translateY(-3px); }
-.btn-primary {
-  background: linear-gradient(135deg, var(--tan) 0%, var(--tan-light) 100%);
-  color: var(--espresso);
-  box-shadow: 0 6px 24px rgba(158,123,82,.3);
-}
-.btn-primary:hover { box-shadow: 0 14px 36px rgba(158,123,82,.4); }
-.btn-outline {
-  background: transparent;
-  color: var(--cream);
-  border: 1px solid rgba(242,235,217,.3);
-}
-.btn-outline:hover { border-color: rgba(242,235,217,.6); background: rgba(242,235,217,.05); }
-
-/* ── FOOTER ── */
-footer {
-  padding: 56px clamp(24px,6vw,80px) 36px;
-  border-top: 1px solid rgba(255,255,255,.06);
-  text-align: center;
-}
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px; font-weight: 300;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--cream-deep); margin-bottom: 8px;
-}
-.footer-sub { font-size: 12px; color: var(--sage); font-weight: 300; margin-bottom: 28px; }
-.footer-socials { display: flex; gap: 10px; justify-content: center; margin-bottom: 36px; }
-.footer-social-icon {
-  width: 38px; height: 38px; border-radius: 9px;
-  background: rgba(92,126,95,.12);
-  border: 1px solid rgba(92,126,95,.2);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--sage-light); text-decoration: none; cursor: none;
-  transition: border-color .3s, color .3s, transform .3s;
-}
-.footer-social-icon:hover { border-color: rgba(201,169,122,.4); color: var(--tan-light); transform: translateY(-2px); }
-.footer-social-icon svg { width: 15px; height: 15px; }
-.footer-copy { font-size: 11px; color: var(--sage); letter-spacing: .08em; }
-
-/* ── DIVIDER ── */
-.divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(92,126,95,.2), transparent); }
-
-/* ── ANIMATIONS ── */
-@keyframes rise { to { opacity: 1; transform: translateY(0); } }
-.reveal { opacity: 0; transform: translateY(28px); }
-.reveal.visible { animation: rise .7s cubic-bezier(.22,1,.36,1) forwards; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-left { clip-path: none; padding: 80px clamp(24px,6vw,60px) 60px; }
-  .hero-right { display: none; }
-  .hero-diagonal { display: none; }
-  .feature-card-float { grid-template-columns: 1fr 1fr; }
-  .pillar-grid { grid-template-columns: 1fr 1fr; }
-  .about-wrap { grid-template-columns: 1fr; gap: 48px; }
-}
-@media (max-width: 580px) {
-  .feature-card-float { grid-template-columns: 1fr; }
-  .pillar-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cta-buttons { flex-direction: column; align-items: center; }
-  .btn { width: 100%; max-width: 280px; justify-content: center; }
+@media (prefers-reduced-motion: reduce){
+  .pivot,.pivot .card{animation:none !important;}
+  .pivot{transform:rotate(calc(45deg * var(--i)));}
+  .scroll-cue{animation:none !important;opacity:1;}
+  .reveal,.link-card,.featured-card{animation:none !important;opacity:1 !important;transform:none !important;}
 }
 </style>
 </head>
@@ -553,456 +225,169 @@ footer {
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+<div class="ambient"></div>
+<div class="grain"></div>
 
-<!-- BG SLIDESHOW -->
-<div class="bg-slide bg-1 active" id="bg1"></div>
-<div class="bg-slide bg-2" id="bg2"></div>
-<div class="bg-slide bg-3" id="bg3"></div>
-<div class="bg-slide bg-4" id="bg4"></div>
-<div class="bg-overlay"></div>
-<canvas id="particles"></canvas>
+<div class="wrap">
 
-<div class="site-wrap">
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-diagonal"></div>
-
-  <div class="hero-left">
-    <div class="logo-mark">
-      <div class="logo-circle-wrap">
-        <img src="images/leafspirelogo.png" alt="Leafspire Foundation Logo" />
-      </div>
-      <div class="logo-wordmark">
-        Leafspire Foundation
-        <span>Nairobi, Kenya</span>
-      </div>
+  <div class="orbit-wrap" aria-hidden="true">
+    <!--
+      Card sources reuse imagery already present in the site's brand library.
+      Each pivot places one card on the ring; negative animation-delay staggers
+      its starting angle so the eight cards sit evenly around the arch.
+    -->
+    <div class="pivot" style="--i:0;--radius:150px;">
+      <div class="card"><div class="frame" style="--size:96px;"><img src="images/1.jpg" alt="" loading="lazy"></div></div>
     </div>
-
-    <div class="hero-eyebrow">Youth · Leadership · Community</div>
-
-    <h1 class="hero-headline">
-      Empowering<br>
-      <em>Africa's</em><br>
-      Next Generation
-    </h1>
-
-    <p class="hero-body">
-      A youth-driven movement advancing leadership, mental wellbeing, sustainability, and social impact — one community at a time.
-    </p>
-
-    <a href="https://forms.gle/5C8PPKQ1FAYqxmAB6" target="_blank" rel="noopener" class="hero-cta">
-      Join the Movement
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-    </a>
-  </div>
-
-  <div class="hero-right">
-    <div class="leaf-bg-texture"></div>
-    <div class="leaf-svg-wrap">
-      <svg viewBox="0 0 420 520" width="380" height="470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Dense dark green leaf cluster top -->
-        <g class="leaf-cluster">
-          <ellipse cx="280" cy="80" rx="70" ry="45" fill="#1A3A1E" opacity=".95" transform="rotate(-30 280 80)"/>
-          <ellipse cx="310" cy="60" rx="55" ry="35" fill="#2A5530" opacity=".9" transform="rotate(-20 310 60)"/>
-          <ellipse cx="255" cy="65" rx="50" ry="32" fill="#0D2712" opacity=".85" transform="rotate(-45 255 65)"/>
-          <ellipse cx="290" cy="95" rx="60" ry="38" fill="#1F4A22" opacity=".8" transform="rotate(-10 290 95)"/>
-          <ellipse cx="325" cy="85" rx="42" ry="28" fill="#153318" opacity=".9" transform="rotate(10 325 85)"/>
-          <!-- Vein lines -->
-          <path d="M240 90 Q270 65 310 55" stroke="rgba(92,126,95,.3)" stroke-width="1" fill="none"/>
-          <path d="M260 100 Q290 78 320 70" stroke="rgba(92,126,95,.25)" stroke-width="1" fill="none"/>
-          <!-- Soft shadow -->
-          <ellipse cx="290" cy="135" rx="65" ry="18" fill="rgba(0,0,0,.25)" opacity=".6"/>
-        </g>
-
-        <!-- Horizontal dried leaf bridging diagonal -->
-        <g transform="translate(60,200) rotate(-8)">
-          <ellipse cx="150" cy="0" rx="140" ry="22" fill="#8B6B3D" opacity=".85"/>
-          <ellipse cx="150" cy="0" rx="140" ry="14" fill="#A07C4A" opacity=".7"/>
-          <path d="M10 0 Q80 -8 150 0 Q220 8 290 0" stroke="rgba(201,169,122,.4)" stroke-width="1.5" fill="none"/>
-          <path d="M60 -6 Q150 2 240 -4" stroke="rgba(201,169,122,.2)" stroke-width="1" fill="none"/>
-          <!-- Shadow -->
-          <ellipse cx="150" cy="18" rx="130" ry="10" fill="rgba(0,0,0,.3)" opacity=".5"/>
-        </g>
-
-        <!-- Vertical golden leaf structural anchor -->
-        <g class="leaf-gold" transform="translate(180,130)">
-          <path d="M0 0 Q-40 80 0 220 Q40 80 0 0Z" fill="#C9A97A" opacity=".9"/>
-          <path d="M0 0 Q-28 80 0 220 Q28 80 0 0Z" fill="#E8C988" opacity=".7"/>
-          <path d="M0 20 L0 200" stroke="rgba(255,235,180,.5)" stroke-width="1.5" fill="none"/>
-          <path d="M0 60 Q-15 80 -22 100" stroke="rgba(255,235,180,.3)" stroke-width="1" fill="none"/>
-          <path d="M0 60 Q15 80 22 100" stroke="rgba(255,235,180,.3)" stroke-width="1" fill="none"/>
-          <path d="M0 100 Q-18 120 -25 140" stroke="rgba(255,235,180,.25)" stroke-width="1" fill="none"/>
-          <path d="M0 100 Q18 120 25 140" stroke="rgba(255,235,180,.25)" stroke-width="1" fill="none"/>
-          <!-- Glow -->
-          <ellipse cx="0" cy="110" rx="20" ry="90" fill="rgba(201,169,122,.08)"/>
-          <!-- Shadow -->
-          <ellipse cx="18" cy="220" rx="30" ry="8" fill="rgba(0,0,0,.25)" opacity=".5"/>
-        </g>
-
-        <!-- Small sprig pointing toward headline -->
-        <g class="leaf-sprig" transform="translate(100,310) rotate(25)">
-          <path d="M0 0 Q-15 -30 0 -70 Q15 -30 0 0Z" fill="#2A5530" opacity=".85"/>
-          <path d="M0 -10 Q-10 -30 0 -60 Q10 -30 0 -10Z" fill="#3D7042" opacity=".7"/>
-          <path d="M0 0 L0 -70" stroke="rgba(92,126,95,.4)" stroke-width="1" fill="none"/>
-          <!-- Tiny leaves on sprig -->
-          <path d="M0 -25 Q-20 -35 -25 -50 Q-5 -42 0 -25Z" fill="#1F4A22" opacity=".8"/>
-          <path d="M0 -35 Q20 -45 25 -60 Q5 -52 0 -35Z" fill="#2A5530" opacity=".75"/>
-        </g>
-
-        <!-- Ambient light catch -->
-        <ellipse cx="210" cy="260" rx="100" ry="80" fill="rgba(201,169,122,.03)"/>
-      </svg>
+    <div class="pivot" style="--i:1;--radius:120px;">
+      <div class="card"><div class="frame" style="--size:78px;--blur:.5px;--fade:.85;"><img src="images/2.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:2;--radius:158px;">
+      <div class="card"><div class="frame" style="--size:88px;"><img src="images/3.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:3;--radius:118px;">
+      <div class="card"><div class="frame" style="--size:74px;--blur:.6px;--fade:.8;"><img src="images/4.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:4;--radius:150px;">
+      <div class="card"><div class="frame" style="--size:96px;"><img src="images/leafspirelogo.png" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:5;--radius:120px;">
+      <div class="card"><div class="frame" style="--size:78px;--blur:.5px;--fade:.85;"><img src="images/5.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:6;--radius:158px;">
+      <div class="card"><div class="frame" style="--size:88px;"><img src="images/6.jpg" alt="" loading="lazy"></div></div>
+    </div>
+    <div class="pivot" style="--i:7;--radius:118px;">
+      <div class="card"><div class="frame" style="--size:74px;--blur:.6px;--fade:.8;"><img src="images/7.jpg" alt="" loading="lazy"></div></div>
     </div>
   </div>
-</section>
 
-<!-- ══ FEATURE BAR ══ -->
-<section class="feature-bar">
-  <div class="feature-card-float reveal">
-    <!-- YouTube -->
-    <a href="https://youtube.com/@leafspirefoundation" target="_blank" rel="noopener" class="feature-col" style="text-decoration:none;color:inherit;cursor:none;">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-      </svg>
-      <h3>YouTube</h3>
-      <p>Stories, campaigns, and impact videos from the field.</p>
-    </a>
-
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/leafspirefoundation/" target="_blank" rel="noopener" class="feature-col" style="text-decoration:none;color:inherit;cursor:none;">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-      </svg>
-      <h3>Instagram</h3>
-      <p>Daily moments, community highlights, and youth voices.</p>
-    </a>
-
-    <!-- Threads (official glyph) -->
-    <a href="https://www.threads.com/@leafspirefoundation" target="_blank" rel="noopener" class="feature-col" style="text-decoration:none;color:inherit;cursor:none;">
-      <svg class="feature-icon" viewBox="0 0 192 192" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M141.537 88.988a66.667 66.667 0 00-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.232c8.25.054 14.476 2.452 18.502 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376C123.581 165.059 107.73 172 88.018 172c-22.066 0-39.19-7.501-50.874-22.298C25.81 135.532 19.786 116.18 19.556 92c.23-24.18 6.254-43.532 17.588-57.702C48.828 19.501 65.95 12 88.018 12c22.214 0 39.513 7.538 51.41 22.406 5.876 7.32 10.283 16.484 13.153 27.067l16.288-4.352c-3.44-12.68-8.853-23.606-16.219-32.667C137.514 8.201 115.685 0 88.018 0c-28.13 0-51.5 8.267-67.463 24.664C6.843 40.645 0 62.658 0 92c0 29.342 6.843 51.355 20.555 67.336C36.518 175.733 59.888 184 88.018 184c24.206 0 44.921-8.05 60.088-23.213 21.618-21.612 20.796-49.39 13.676-66.203-5.033-11.729-14.54-20.23-20.245-24.596z"/>
-        <path d="M109.975 100.918c-.52-10.09-7.336-15.232-15.58-15.232h-.197c-8.75.054-14.087 4.985-13.774 12.087.285 6.516 5.483 10.64 13.777 10.64h.194c2.677-.017 5.137-.494 7.294-1.413.06.55.105 1.1.13 1.656.255 5.67-3.1 9.278-8.742 9.596-4.07.228-7.927-.84-10.334-2.836-1.842-1.52-2.79-3.559-2.863-6.064l-.009-.454v-.013c-.174-4.85.948-9.078 3.152-12.237.38-.54.79-1.05 1.223-1.533-1.097 2.91-1.637 6.13-1.47 9.67.19 4.08 1.727 7.42 4.58 9.929 2.853 2.51 6.83 3.831 11.501 3.81 7.24-.033 12.28-3.9 14.118-10.407z"/>
-      </svg>
-      <h3>Threads</h3>
-      <p>Conversations, ideas, and updates from our community.</p>
-    </a>
-
-    <!-- Website / Community -->
-    <a href="https://leafspire.github.io/leafoundation" target="_blank" rel="noopener" class="feature-col" style="text-decoration:none;color:inherit;cursor:none;">
-      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-      </svg>
-      <h3>Our Website</h3>
-      <p>Programs, stories, and how to get involved in full.</p>
+  <div class="hero-identity">
+    <div class="logo-badge" id="logoBadge">
+      <img src="images/leafspirelogo.png" alt="Leafspire Foundation logo" onerror="document.getElementById('logoBadge').classList.add('mark-fallback')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97-3.97 8-8.13 8-11.8a8 8 0 00-16 0C4 13.87 7.03 18.03 12 22z"/><path d="M8 11.5a4 4 0 018 0"/></svg>
+    </div>
+    <p class="eyebrow">Nairobi, Kenya</p>
+    <h1 class="wordmark">Leafspire<br><em>Foundation</em></h1>
+    <p class="tagline">Empowering youth. Transforming communities. Building tomorrow.</p>
+    <a href="#links" class="scroll-cue">Explore
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
     </a>
   </div>
 </section>
 
-<!-- ══ PILLAR GRID ══ -->
-<section class="pillar-section">
-  <div class="pillar-header reveal">
-    <div class="pillar-eyebrow">Areas of Focus</div>
-    <h2 class="pillar-title">Our <em>Impact</em> Pillars</h2>
+<!-- ============ LINKS ============ -->
+<section class="links" id="links">
+  <p class="section-label reveal">Get Involved</p>
+  <h2 class="section-heading reveal">Ways to <em>join us</em></h2>
+
+  <div class="featured-row">
+    <a href="https://forms.gle/5C8PPKQ1FAYqxmAB6" target="_blank" rel="noopener" class="featured-card">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>Become a Volunteer</h3>
+      <p>Give your time, shift a community.</p>
+    </a>
+    <a href="https://forms.gle/JBKhsFCjR4HMWfMu6" target="_blank" rel="noopener" class="featured-card">
+      <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97-3.97 8-8.13 8-11.8a8 8 0 00-16 0C4 13.87 7.03 18.03 12 22z"/><path d="M8 11.5a4 4 0 018 0"/></svg></div>
+      <h3>Become a Mentor</h3>
+      <p>Guide a young leader forward.</p>
+    </a>
   </div>
 
-  <div class="pillar-grid">
-    <!-- 1 -->
-    <div class="pillar-card sage reveal">
-      <div class="card-badge badge-white">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22c4.97-3.97 8-8.13 8-11.8a8 8 0 00-16 0C4 13.87 7.03 18.03 12 22z"/>
-          <path d="M8 11.5a4 4 0 018 0"/>
-        </svg>
-      </div>
-      <h3>Leadership & Mentorship</h3>
-      <p>Cultivating confident, visionary leaders through dedicated mentorship and hands-on development programs that inspire transformational change.</p>
-      <div class="card-num">01</div>
-    </div>
+  <p class="section-label reveal" style="margin-top:8px;">Follow &amp; Contact</p>
+  <div class="link-grid" style="margin-top:20px;">
 
-    <!-- 2 -->
-    <div class="pillar-card espresso reveal" style="animation-delay:.08s">
-      <div class="card-badge badge-sage">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--sage-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-        </svg>
-      </div>
-      <h3>Mental Health & Wellbeing</h3>
-      <p>Breaking stigma and building resilience by providing accessible mental health advocacy and emotional wellness support for African youth.</p>
-      <div class="card-num">02</div>
-    </div>
+    <a href="https://leafspire.github.io/leafoundation" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <div class="link-text"><div class="link-name">Official Website</div><div class="link-sub">Programs, stories &amp; our full work</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
 
-    <!-- 3 -->
-    <div class="pillar-card tan reveal" style="animation-delay:.16s">
-      <div class="card-badge badge-white">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
-      </div>
-      <h3>Community & Volunteering</h3>
-      <p>Mobilising passionate volunteers to drive grassroots initiatives that deliver real, lasting change across underserved communities.</p>
-      <div class="card-num">03</div>
-    </div>
+    <a href="https://www.instagram.com/leafspirefoundation/" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+      <div class="link-text"><div class="link-name">Instagram</div><div class="link-sub">@leafspirefoundation</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
 
-    <!-- 4 - image card -->
-    <div class="pillar-card img-card reveal" style="animation-delay:.24s; min-height:280px;">
-      <div class="img-card-inner"></div>
-      <div class="img-card-text">
-        <h3>Youth in Action</h3>
-        <p>Real stories. Real communities. Real change.</p>
-      </div>
-    </div>
+    <a href="https://youtube.com/@leafspirefoundation" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42A2.78 2.78 0 0020.82 4.7C19.24 4.26 12 4.26 12 4.26s-7.24 0-8.82.44A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.18 19.3c1.58.44 8.82.44 8.82.44s7.24 0 8.82-.44a2.78 2.78 0 001.72-1.72A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+      <div class="link-text"><div class="link-name">YouTube</div><div class="link-sub">@leafspirefoundation</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
 
-    <!-- 5 -->
-    <div class="pillar-card dark-brown reveal" style="animation-delay:.32s">
-      <div class="card-badge badge-tan">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--tan-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
-          <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
-        </svg>
-      </div>
-      <h3>Education & Skills</h3>
-      <p>Equipping young people with practical knowledge, vocational skills, and academic support to unlock their full potential.</p>
-      <div class="card-num">05</div>
-    </div>
+    <a href="https://x.com/home" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg></div>
+      <div class="link-text"><div class="link-name">X (Twitter)</div><div class="link-sub">@leafspirefoundation</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
 
-    <!-- 6 -->
-    <div class="pillar-card cream-card reveal" style="animation-delay:.4s">
-      <div class="card-badge badge-hex">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--tan-light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <h3>SDGs & Environment</h3>
-      <p>Championing climate action, tree-planting campaigns, and environmental education aligned with the UN Sustainable Development Goals.</p>
-      <div class="card-num">06</div>
-    </div>
+    <a href="https://www.facebook.com/stmarthaknt/" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+      <div class="link-text"><div class="link-name">Facebook</div><div class="link-sub">Leafspire Foundation</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
+
+    <a href="https://www.threads.com/@leafspirefoundation" target="_blank" rel="noopener" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5c-1.5-2-4-3-6.5-2.5-3.5.7-5.5 3.5-5 7 .3 2 1.5 4 4 5 2 .8 4.5.5 6-1.5"/><path d="M12 12c0 0 2 0 3 1.5s0 3.5-2 3.5-3-2-3-3.5S11 10 13 9s4 0 5 2"/></svg></div>
+      <div class="link-text"><div class="link-name">Threads</div><div class="link-sub">@leafspirefoundation</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
+
+    <a href="mailto:leafspirefoundation@gmail.com" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div class="link-text"><div class="link-name">Email Us</div><div class="link-sub">leafspirefoundation@gmail.com</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
+
+    <a href="tel:+254701114562" class="link-card">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2H5.1a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+      <div class="link-text"><div class="link-name">Call Us</div><div class="link-sub">+254 701 114 562</div></div>
+      <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+    </a>
+
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ══ ABOUT + STATS ══ -->
-<section class="about-wrap">
-  <div class="about-left reveal">
-    <div class="about-line"></div>
-    <h2>Growing <em>Leaders.</em><br>Creating <em>Impact.</em></h2>
-    <p>Leafspire Foundation empowers young people through mentorship, leadership development, mental health advocacy, sustainability initiatives, volunteerism, and community-driven action — building a generation capable of transforming Africa.</p>
-  </div>
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-number" data-target="500">0</div>
-      <div class="stat-label">Youth Reached</div>
-    </div>
-    <div class="stat-card" style="animation-delay:.1s">
-      <div class="stat-number" data-target="10">0</div>
-      <div class="stat-label">Communities Served</div>
-    </div>
-    <div class="stat-card" style="animation-delay:.2s">
-      <div class="stat-number" data-target="50">0</div>
-      <div class="stat-label">Active Volunteers</div>
-    </div>
-    <div class="stat-card" style="animation-delay:.3s">
-      <div class="stat-number" data-target="10">0</div>
-      <div class="stat-label">Impact Programs</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ══ LINKS ══ -->
-<section class="links-section">
-  <div class="links-inner">
-    <div class="links-label reveal">Connect With Us</div>
-    <div class="links-grid" id="linksGrid">
-
-      <a href="https://leafspire.github.io/leafoundation" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-        <div class="link-text"><div class="link-name">Official Website</div><div class="link-handle">Leafspire Foundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="https://www.instagram.com/leafspirefoundation/" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-        <div class="link-text"><div class="link-name">Instagram</div><div class="link-handle">@leafspirefoundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="https://youtube.com/@leafspirefoundation" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42A2.78 2.78 0 0020.82 4.7C19.24 4.26 12 4.26 12 4.26s-7.24 0-8.82.44A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.18 19.3c1.58.44 8.82.44 8.82.44s7.24 0 8.82-.44a2.78 2.78 0 001.72-1.72A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
-        <div class="link-text"><div class="link-name">YouTube</div><div class="link-handle">@leafspirefoundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="https://x.com/home" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg></div>
-        <div class="link-text"><div class="link-name">X (Twitter)</div><div class="link-handle">@leafspirefoundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="https://www.facebook.com/stmarthaknt/" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
-        <div class="link-text"><div class="link-name">Facebook</div><div class="link-handle">Leafspire Foundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="https://www.threads.com/@leafspirefoundation" target="_blank" rel="noopener" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5c-1.5-2-4-3-6.5-2.5-3.5.7-5.5 3.5-5 7 .3 2 1.5 4 4 5 2 .8 4.5.5 6-1.5"/><path d="M12 12c0 0 2 0 3 1.5s0 3.5-2 3.5-3-2-3-3.5S11 10 13 9s4 0 5 2"/></svg></div>
-        <div class="link-text"><div class="link-name">Threads</div><div class="link-handle">@leafspirefoundation</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="mailto:leafspirefoundation@gmail.com" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div class="link-text"><div class="link-name">Email Us</div><div class="link-handle">leafspirefoundation@gmail.com</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-      <a href="tel:+254701114562" class="link-card">
-        <div class="link-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2H5.1a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-        <div class="link-text"><div class="link-name">Call Us</div><div class="link-handle">+254 701 114 562</div></div>
-        <div class="link-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <div class="cta-eyebrow reveal">Take Action Today</div>
-    <h2 class="cta-title reveal" style="animation-delay:.1s">Join The<br><em>Movement</em></h2>
-    <p class="cta-body reveal" style="animation-delay:.2s">Be part of a generation rewriting the future of Africa. Whether you volunteer, mentor, or simply connect — every action creates ripples of change.</p>
-    <div class="cta-buttons reveal" style="animation-delay:.3s">
-      <a href="https://forms.gle/5C8PPKQ1FAYqxmAB6" target="_blank" rel="noopener" class="btn btn-primary">Become a Volunteer</a>
-      <a href="https://forms.gle/JBKhsFCjR4HMWfMu6" target="_blank" rel="noopener" class="btn btn-outline">Become a Mentor</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
 <footer>
-  <div class="footer-logo">Leafspire Foundation</div>
-  <div class="footer-sub">Empowering Young People To Build A Better Future.</div>
-  <div class="footer-socials">
-    <a href="https://leafspire.github.io/leafoundation" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Website"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></a>
-    <a href="https://www.instagram.com/leafspirefoundation/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-    <a href="https://youtube.com/@leafspirefoundation" target="_blank" rel="noopener" class="footer-social-icon" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42A2.78 2.78 0 0020.82 4.7C19.24 4.26 12 4.26 12 4.26s-7.24 0-8.82.44A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.18 19.3c1.58.44 8.82.44 8.82.44s7.24 0 8.82-.44a2.78 2.78 0 001.72-1.72A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
-    <a href="https://x.com/home" target="_blank" rel="noopener" class="footer-social-icon" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4"/></svg></a>
-    <a href="https://www.facebook.com/stmarthaknt/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-    <a href="https://www.threads.com/@leafspirefoundation" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Threads"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5c-1.5-2-4-3-6.5-2.5-3.5.7-5.5 3.5-5 7 .3 2 1.5 4 4 5 2 .8 4.5.5 6-1.5"/><path d="M12 12c0 0 2 0 3 1.5s0 3.5-2 3.5-3-2-3-3.5S11 10 13 9s4 0 5 2"/></svg></a>
-    <a href="mailto:leafspirefoundation@gmail.com" class="footer-social-icon" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-  </div>
-  <div class="footer-copy">&copy; <span id="year"></span> Leafspire Foundation. All rights reserved. &nbsp;·&nbsp; Nairobi, Kenya</div>
+  <p class="footer-copy">&copy; <span id="year"></span> Leafspire Foundation — Nairobi, Kenya</p>
 </footer>
 
-</div><!-- /site-wrap -->
+</div>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ── CURSOR ── */
+/* cursor follower */
 const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursorRing');
-let mx = 0, my = 0, cx = 0, cy = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove', e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
 });
-(function animRing() {
-  cx += (mx-cx)*.14; cy += (my-cy)*.14;
-  cursorRing.style.left = cx+'px'; cursorRing.style.top = cy+'px';
-  requestAnimationFrame(animRing);
+(function loop(){
+  cx += (mx-cx)*.16; cy += (my-cy)*.16;
+  ring.style.left=cx+'px'; ring.style.top=cy+'px';
+  requestAnimationFrame(loop);
 })();
-document.querySelectorAll('a,button,.pillar-card,.link-card,.feature-col,.stat-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+document.querySelectorAll('a,.frame').forEach(el=>{
+  el.addEventListener('mouseenter', ()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', ()=>document.body.classList.remove('hovering'));
 });
 
-/* ── BG SLIDESHOW ── */
-const slides = document.querySelectorAll('.bg-slide');
-let current = 0;
-setInterval(() => {
-  slides[current].classList.remove('active');
-  current = (current+1) % slides.length;
-  slides[current].classList.add('active');
-}, 6000);
-
-/* ── PARTICLES ── */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let W, H;
-function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-const PCOLS = ['rgba(92,126,95,','rgba(26,58,30,','rgba(201,169,122,','rgba(196,217,198,'];
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random()*W; this.y = Math.random()*H;
-    this.size = Math.random()*1.4+0.3;
-    this.speedX = (Math.random()-.5)*.25;
-    this.speedY = -Math.random()*.35-.1;
-    this.opacity = Math.random()*.45+.1;
-    this.color = PCOLS[Math.floor(Math.random()*PCOLS.length)];
-    this.life = 0; this.maxLife = Math.random()*320+180;
-  }
-  update() { this.x+=this.speedX; this.y+=this.speedY; this.life++; if(this.life>this.maxLife||this.y<-10)this.reset(); }
-  draw() {
-    const fi = Math.min(this.life/60,1), fo = Math.min((this.maxLife-this.life)/60,1);
-    ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-    ctx.fillStyle = this.color+(this.opacity*fi*fo)+')'; ctx.fill();
-  }
-}
-const particles = [];
-for(let i=0;i<100;i++){const p=new Particle();p.life=Math.floor(Math.random()*p.maxLife);particles.push(p);}
-(function animP(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animP); })();
-
-/* ── PARALLAX BLOBS (removed — now BG images do the work) ── */
-
-/* ── SCROLL REVEAL ── */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal,.stat-card,.link-card').forEach(el => observer.observe(el));
-
-/* Stagger link cards */
-document.querySelectorAll('.link-card').forEach((c,i) => c.style.animationDelay = (i*.07)+'s');
-document.querySelectorAll('.pillar-card').forEach((c,i) => {
-  if(!c.style.animationDelay) c.style.animationDelay = (i*.08)+'s';
-});
-
-/* ── COUNTER ── */
-function animateCounter(el, target) {
-  const dur = 1600; const start = performance.now();
-  (function up(now) {
-    const p = Math.min((now-start)/dur,1);
-    const e = 1-Math.pow(1-p,3);
-    el.textContent = Math.floor(e*target).toLocaleString()+'+';
-    if(p<1) requestAnimationFrame(up);
-  })(performance.now());
-}
-const statObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      const n = e.target.querySelector('.stat-number');
-      if(n && !n.dataset.animated){ n.dataset.animated='1'; animateCounter(n, parseInt(n.dataset.target)); }
-    }
+/* scroll reveal */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
   });
-}, { threshold: .5 });
-document.querySelectorAll('.stat-card').forEach(c => statObs.observe(c));
+},{threshold:.12});
+document.querySelectorAll('.reveal,.link-card,.featured-card').forEach(el=>io.observe(el));
 
-/* ── REDUCED MOTION ── */
-if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  document.querySelectorAll('[style*="animation"]').forEach(el => { el.style.animation='none'; el.style.opacity='1'; el.style.transform='none'; });
-}
+document.querySelectorAll('.link-card').forEach((c,i)=> c.style.animationDelay = (i*.06)+'s');
+document.querySelectorAll('.featured-card').forEach((c,i)=> c.style.animationDelay = (i*.1)+'s');
 </script>
 </body>
 </html>
